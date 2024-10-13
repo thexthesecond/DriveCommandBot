@@ -20,9 +20,7 @@ public class POVCommand extends Command {
 
     @Override
     public void execute() {
-        int PovAngle = driveTrain.pov;
-
-        switch (PovAngle) {
+        switch (driveTrain.pov) {
             case 0:
                 driveTrain.Lspeed = 1;
                 driveTrain.Rspeed = 1;

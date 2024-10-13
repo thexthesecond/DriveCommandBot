@@ -2,18 +2,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 public class AxisCommand extends Command {
     DriveTrain driveTrain;
     Joystick joy;
-    RobotContainer robotContainer;
     
-    public AxisCommand(DriveTrain driveTrain, Joystick joy, RobotContainer robotContainer) {
+    public AxisCommand(DriveTrain driveTrain, Joystick joy) {
         this.driveTrain = driveTrain;
         this.joy = joy;
-        this.robotContainer = robotContainer;
         addRequirements(driveTrain);
     }
 

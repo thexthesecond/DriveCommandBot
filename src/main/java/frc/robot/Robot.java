@@ -22,9 +22,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_RobotContainer = new RobotContainer(driveTrain);
-
+    
     axisCommand = m_RobotContainer.axisCommand;
     povCommand = m_RobotContainer.povCommand;
+    
   }
 
   @Override
@@ -45,7 +46,7 @@ public class Robot extends TimedRobot {
     Px2 = driveTrain.Px2;
     Py2 = driveTrain.Py2;
     pov = driveTrain.pov;
-
+    
     if ((Py != 0 || Px != 0) || (Px2 != 0 || Py2 != 0)) {
       axisCommand.schedule();
     }

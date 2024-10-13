@@ -3,25 +3,21 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import frc.robot.commands.AxisCommand;
 
 public class DriveTrain extends SubsystemBase{
     
     public Joystick joy = new Joystick(Constants.JoyPort);
 
-    public AxisCommand axisCommand;
     public final VictorSPX l_motorF = new VictorSPX(Constants.lmotor_port1);
     public final VictorSPX l_motorB = new VictorSPX(Constants.lmotor_port2);
     public final VictorSPX r_motorF = new VictorSPX(Constants.rmotor_port1);
     public final VictorSPX r_motorB = new VictorSPX(Constants.rmotor_port2);
+    
     public double Lspeed, Rspeed, Px, Py, Px2, Py2, rad, diff, mag;
-    public double velocity = 0.25;
-    public RobotContainer robotContainer;
+    public double velocity = 0.5;
     public boolean a,b,x;
     public int quad, pov;
 
@@ -45,7 +41,7 @@ public class DriveTrain extends SubsystemBase{
         else {return val;}
       }
 
-      public double Difference(double rad) {
+    public double Difference(double rad) {
         return Math.sin(rad) * Math.cos((Math.PI / 2) - rad);
     }
 
@@ -63,11 +59,7 @@ public class DriveTrain extends SubsystemBase{
             default: Lspeed =Rspeed = 0; break;
         }
 
-        if (Px < 0 && Py == 0) {
-            Lspeed = -(mag * Math.cos(rad));
-            Rspeed = mag * Math.cos(rad);
-        }
-        if (Px > 0 && Py == 0) {
+        if (Px != 0 && Py == 0) {
             Rspeed = -(mag * Math.cos(rad));
             Lspeed = mag * Math.cos(rad);
         }
@@ -80,7 +72,7 @@ public class DriveTrain extends SubsystemBase{
         Rspeed = Math.max(-1 , Math.min(1, Rspeed)) * velocity;
     }
 
-    public void runMotors(double Lspeed, double Rspeed) {
+    public void setMotors(double Lspeed, double Rspeed) {
         l_motorF.set(ControlMode.PercentOutput, Lspeed);
         r_motorF.set(ControlMode.PercentOutput, Rspeed);
     }
@@ -101,6 +93,7 @@ public class DriveTrain extends SubsystemBase{
         Py = Deadzone(-joy.getRawAxis(1));
         Px2 = Deadzone(-joy.getRawAxis(4));
         Py2 = Deadzone(joy.getRawAxis(5));
-        runMotors(Lspeed, Rspeed);
+
+        setMotors(Lspeed, Rspeed);
     }
 }
