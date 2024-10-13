@@ -17,6 +17,7 @@ public class DriveTrain extends SubsystemBase{
     public final VictorSPX r_motorB = new VictorSPX(Constants.rmotor_port2);
     
     public double Lspeed, Rspeed, Px, Py, Px2, Py2, rad, diff, mag;
+    public double TriggerVel;
     public double velocity = 0.5;
     public boolean a,b,x;
     public int quad, pov;
@@ -68,6 +69,9 @@ public class DriveTrain extends SubsystemBase{
             Lspeed = Rspeed = mag * Math.sin(rad);
         }
 
+        if (TriggerVel != 0 && (Px != 0 || Py != 0)) {Lspeed *= TriggerVel; Rspeed *= TriggerVel;}
+        if (TriggerVel != 0 && (Px == 0 || Py == 0)) {Lspeed = Rspeed += TriggerVel;}
+
         Lspeed = Math.max(-1 , Math.min(1, Lspeed)) * velocity;
         Rspeed = Math.max(-1 , Math.min(1, Rspeed)) * velocity;
     }
@@ -93,6 +97,8 @@ public class DriveTrain extends SubsystemBase{
         Py = Deadzone(-joy.getRawAxis(1));
         Px2 = Deadzone(-joy.getRawAxis(4));
         Py2 = Deadzone(joy.getRawAxis(5));
+        
+        TriggerVel = joy.getRawAxis(2) - joy.getRawAxis(3);
 
         setMotors(Lspeed, Rspeed);
     }
