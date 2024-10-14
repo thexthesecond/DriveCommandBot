@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase{
       }
 
     public double Difference(double rad) {
-        return Math.sin(rad) * Math.cos((Math.PI / 2) - rad);
+        return Math.pow(Math.sin(rad), 2);
     }
 
     public void AxiSpeeds(double Px, double Py) {
@@ -76,9 +76,32 @@ public class DriveTrain extends SubsystemBase{
         Rspeed = Math.max(-1 , Math.min(1, Rspeed)) * velocity;
     }
 
+    
+
     public void setMotors(double Lspeed, double Rspeed) {
         l_motorF.set(ControlMode.PercentOutput, Lspeed);
         r_motorF.set(ControlMode.PercentOutput, Rspeed);
+    }
+
+    public double SpeedMode() {
+        if (a) return 0.5;
+        if (b) return 0.25;
+        if (x) return 1;
+        else return velocity;
+    }
+
+    public void POV() {
+        switch (pov) {
+            case 0: Lspeed = 1; Rspeed = 1; break;
+            case 45: Lspeed = 1; Rspeed = 0; break;
+            case 90: Lspeed = 1; Rspeed = -1; break;
+            case 135: Lspeed = -1; Rspeed = 0; break;
+            case 180: Lspeed = -1; Rspeed = -1; break;
+            case 225: Lspeed = 0; Rspeed = -1; break;
+            case 270: Lspeed = -1; Rspeed = 1; break;
+            case 315: Lspeed = 0; Rspeed = 1; break;
+            default: Lspeed = 0; Rspeed = 0; break;
+        }
     }
 
     @Override
@@ -87,17 +110,14 @@ public class DriveTrain extends SubsystemBase{
         b = joy.getRawButton(2);
         x = joy.getRawButton(3);
 
+        velocity = SpeedMode();
         pov = joy.getPOV();
-
-        if (a) velocity = 0.5;
-        if (b) velocity = 0.25;
-        if (x) velocity = 1;
 
         Px = Deadzone(joy.getRawAxis(0));
         Py = Deadzone(-joy.getRawAxis(1));
         Px2 = Deadzone(-joy.getRawAxis(4));
         Py2 = Deadzone(joy.getRawAxis(5));
-        
+
         TriggerVel = joy.getRawAxis(2) - joy.getRawAxis(3);
 
         setMotors(Lspeed, Rspeed);

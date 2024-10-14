@@ -20,44 +20,7 @@ public class POVCommand extends Command {
 
     @Override
     public void execute() {
-        switch (driveTrain.pov) {
-            case 0:
-                driveTrain.Lspeed = 1;
-                driveTrain.Rspeed = 1;
-                break;
-            case 45:
-                driveTrain.Lspeed = 1;
-                driveTrain.Rspeed = 0;
-                break;
-            case 90:
-                driveTrain.Lspeed = 1;
-                driveTrain.Rspeed = -1;
-                break;
-            case 135:
-                driveTrain.Lspeed = -1;
-                driveTrain.Rspeed = 0;
-                break;
-            case 180:
-                driveTrain.Lspeed = -1;
-                driveTrain.Rspeed = -1;
-                break;
-            case 225:
-                driveTrain.Lspeed = 0;
-                driveTrain.Rspeed = -1;
-                break;
-            case 270:
-                driveTrain.Lspeed = -1;
-                driveTrain.Rspeed = 1;
-                break;
-            case 315:
-                driveTrain.Lspeed = 0;
-                driveTrain.Rspeed = 1;
-                break;
-            default:
-                driveTrain.Lspeed = 0;
-                driveTrain.Rspeed = 0;
-                break;
-            }
+        driveTrain.POV();
     }
 
     @Override
