@@ -26,18 +26,12 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
   }
 
-  public void DriveDashboard() {
+  @Override
+  public void teleopPeriodic() {
     SmartDashboard.putNumber("Motor esq.", driveTrain.Lspeed);
     SmartDashboard.putNumber("Motor dir.", driveTrain.Rspeed);
     SmartDashboard.putNumber("Diff.", driveTrain.diff);
     SmartDashboard.putNumber("Quad.", driveTrain.quad);
     SmartDashboard.putNumber("Mag.", driveTrain.mag);
-  }
-
-  @Override
-  public void teleopPeriodic() {
-    m_RobotContainer.HandleDriveCommands();
-    
-    DriveDashboard();
   }
 }

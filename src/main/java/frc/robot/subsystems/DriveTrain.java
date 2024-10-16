@@ -76,8 +76,6 @@ public class DriveTrain extends SubsystemBase{
         Rspeed = Math.max(-1 , Math.min(1, Rspeed)) * velocity;
     }
 
-    
-
     public void setMotors(double Lspeed, double Rspeed) {
         l_motorF.set(ControlMode.PercentOutput, Lspeed);
         r_motorF.set(ControlMode.PercentOutput, Rspeed);
@@ -118,7 +116,7 @@ public class DriveTrain extends SubsystemBase{
         Px2 = Deadzone(-joy.getRawAxis(4));
         Py2 = Deadzone(joy.getRawAxis(5));
 
-        TriggerVel = joy.getRawAxis(2) - joy.getRawAxis(3);
+        TriggerVel = joy.getRawAxis(3) - joy.getRawAxis(2);
 
         setMotors(Lspeed, Rspeed);
     }
