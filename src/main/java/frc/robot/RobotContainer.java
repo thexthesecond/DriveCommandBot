@@ -12,8 +12,8 @@ public class RobotContainer {
   public Trigger axisTrigger;
   public Trigger povTrigger;
 
-  public final AxisCommand axisCommand;
-  public final POVCommand povCommand;
+  private final AxisCommand axisCommand;
+  private final POVCommand povCommand;
 
   public RobotContainer(DriveTrain driveTrain) {
     this.driveTrain = driveTrain;

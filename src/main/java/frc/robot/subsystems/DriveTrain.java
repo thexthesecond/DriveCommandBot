@@ -38,7 +38,7 @@ public class DriveTrain extends SubsystemBase{
     }
 
     public double Deadzone(double val) {
-        if (Math.abs(val) < 0.04) {return 0;}
+        if (Math.abs(val) < Constants.deadzone) {return 0;}
         else {return val;}
       }
 
@@ -82,9 +82,9 @@ public class DriveTrain extends SubsystemBase{
     }
 
     public double SpeedMode() {
-        if (a) return 0.5;
-        if (b) return 0.25;
-        if (x) return 1;
+        if (a) return Constants.medSpeed;
+        if (b) return Constants.minSpeed;
+        if (x) return Constants.maxSpeed;
         else return velocity;
     }
 
