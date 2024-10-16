@@ -26,8 +26,8 @@ public class RobotContainer {
 
   public void configureBindings() {
 
-    axisTrigger = new Trigger(() -> joy.getRawAxis(1) != 0)
-    .or(() -> joy.getRawAxis(2) != 0)
+    axisTrigger = new Trigger(() -> joy.getRawAxis(0) != 0)
+    .or(() -> joy.getRawAxis(1) != 0)
     .or(() -> joy.getRawAxis(4) != 0)
     .or(() -> joy.getRawAxis(5) != 0);
 
