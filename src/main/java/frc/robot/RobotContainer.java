@@ -21,6 +21,8 @@ public class RobotContainer {
   }
 
   public void configureBindings() {
+    driveTrain.setDefaultCommand(driveCommand);
+    
     driveTrigger = new Trigger(() -> joy.getRawAxis(0) != 0)
     .or(() -> joy.getRawAxis(1) != 0)
     .or(() -> joy.getRawAxis(4) != 0)
