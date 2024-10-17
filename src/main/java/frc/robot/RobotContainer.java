@@ -10,7 +10,7 @@ public class RobotContainer {
   public Joystick joy;
   public Trigger driveTrigger;
 
-  private final DriveCommand axisCommand;
+  private final DriveCommand driveCommand;
 
   public RobotContainer(DriveTrain driveTrain) {
     this.driveTrain = driveTrain;
