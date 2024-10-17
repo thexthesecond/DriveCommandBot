@@ -40,7 +40,7 @@ public class DriveTrain extends SubsystemBase{
     public double Deadzone(double val) {
         if (Math.abs(val) < Constants.deadzone) {return 0;}
         else {return val;}
-      }
+    }
 
     public double Difference(double rad) {
         return Math.pow(Math.sin(rad), 2);
