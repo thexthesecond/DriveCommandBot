@@ -16,7 +16,7 @@ public class RobotContainer {
     this.driveTrain = driveTrain;
     joy = driveTrain.joy;
 
-    axisCommand = new DriveCommand(driveTrain, joy);
+    driveCommand = new DriveCommand(driveTrain, joy);
     configureBindings();
   }
 
@@ -29,6 +29,6 @@ public class RobotContainer {
     .or(() -> joy.getRawAxis(5) != 0)
     .or(() -> joy.getPOV() != -1);
 
-    driveTrigger.onTrue(axisCommand);
+    driveTrigger.onTrue(driveCommand);
   }
 }
